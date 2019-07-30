@@ -1,0 +1,84 @@
+\version          [final]
+
+% set main language to English
+\mainlanguage      [en]
+
+% set paper size to A4
+\setuppapersize    [A4]
+
+% define the page layout
+\setuplayout
+  [backspace=20mm,
+   bottomspace=20mm,
+   cutspace=0mm,
+   footer=0mm,
+   header=0mm,
+   height=middle,
+   topspace=10mm,
+   width=middle]
+% \showframe
+
+% remove page numbers by setting an empty location
+\setuppagenumbering[location=]
+
+% Colour definitions for headings
+\definecolor       [bluetheme][h=1155cc]
+\definecolor       [greytheme][h=434343]
+
+% Font setup
+% https://wiki.contextgarden.net/Simplefonts
+\definefontfamily  [cvfontfamily][rm][LiberationSerif]
+\definefontfamily  [cvfontfamily][ss][Carlito]
+\definefontfamily  [cvfontfamily][tt][LiberationMono]
+\definefontfamily  [cvfontfamily][mm][LibertinusMath]
+\setupbodyfont     [cvfontfamily,ss,10pt]
+
+% define the font scaling when using commands such as \tfa, \tfb, etc
+\definebodyfontenvironment [10pt][a=11pt,b=20pt,c=32pt]
+
+% cvtitle outputs the title of the CV
+% arguments:
+% #1 - name: name of the individual
+% #2 - role: job role of the individual
+\define[2]\cvtitle{
+  {\bfc#1}\blank[small]{\tfb#2}
+}
+
+% jobsection outputs the summary of a work experience
+% arguments:
+% #1 - company: the company where the work experience took place
+% #2 - location:  the location of the work experience
+% #3 - role: the role of the work experience
+% #4 - duration: the duration of the work experience (e.g. March, 2017 - April, 2018)
+\define[4]\jobsection{
+  {\bfa#1,} {\tfa#2} — {\tfa\em#3}\blank[small]\color[greytheme]{#4}\blank[line]
+}
+\definehead        [skillssection][subsection]
+
+\setuphead         [section][color=bluetheme]
+\setuphead         [skillssection][color=black]
+\setuphead         [section, skillssection][number=no, align=right, style=\bfa]
+
+% setup the format of items (bullet points)
+\setupitemize
+  [1]
+  [packed]
+  [align=right,
+   symbol=1,
+   margin=no,
+   distance=1mm]
+
+% defineparagraphs and setupparagraphs allows us to create custom
+% columns. Here we define and configure a paragraph environment for the CV title
+% and contact columns.
+% https://wiki.contextgarden.net/Command/defineparagraphs
+% https://wiki.contextgarden.net/Command/setupparagraphs
+\defineparagraphs[titleAndContact][n=2,after={\blank}]
+\setupparagraphs [titleAndContact][1][width=0.6\textwidth]
+\setupparagraphs [titleAndContact][2][width=0.4\textwidth]
+
+% use Interaction to create hyperlinks to external profiles
+\setupinteraction
+  [state=start,
+   color=bluetheme,
+   click=]

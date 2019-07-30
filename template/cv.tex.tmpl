@@ -1,0 +1,53 @@
+<<- /* Prepend the setup area */ ->>
+<< template "cv_setup.tex.tmpl" .>>
+
+\starttext
+  \starttitleAndContact
+      \cvtitle{<<.FirstName>> <<.LastName>>}{<<.JobTitle>>}
+    \titleAndContact
+      {\bf Email:} <<.Contact.Email>>\blank[none]
+      {\bf Phone:} <<.Contact.Phone>>\blank[none]
+      {\bf Location:} <<.Contact.Location>>\blank[medium]
+
+      {\bf GitLab:} \goto{<<.Links.GitLab>>}[url(https://<<.Links.GitLab>>)]\blank[none]
+      {\bf GitHub:} \goto{<<.Links.GitHub>>}[url(https://<<.Links.GitHub>>)]\blank[none]
+  \stoptitleAndContact
+
+  \section{SUMMARY}
+    <<.Summary>>
+
+  \section{SKILLS SUMMARY}
+    \starttabulate[|w(0.3\textwidth)lB|lp(0.7\textwidth)|]
+    <<$lenTech := len .Technologies>>
+    <<range $i, $tech := .Technologies>>
+      <<$lenValues := len $tech.Values>>
+      \NC <<$tech.Category>> \NC <<range $j, $val := $tech.Values>><<$val>><<if notLastElement $j $lenValues>>, <<end>><<end>>\NC\NR
+      <<if notLastElement $i $lenTech>>\TB[1mm]<<end>>
+    <<end>>
+    \stoptabulate
+  \section{EXPERIENCE}
+    <<- range .Employment>>
+    \jobsection{<<.Company>>}{<<.Location>>}{<<.JobTitle>>}{<<.Duration.Start>> - <<.Duration.End>>}
+      \startitemize
+      <<range .Details>>
+        \item <<.>>
+      <<end>>
+      \stopitemize
+    <<end>>
+
+  \section{EDUCATION}
+    <<range .Education ->>
+    \jobsection{<<.School>>}{<<.Location>>}{<<.Qualification>>}{<<.Duration.Start>> - <<.Duration.End>>}
+      \startitemize
+      <<range .Details>>
+        \item <<.>>
+      <<end>>
+      \stopitemize
+    <<end>>
+
+  \section{OTHER INTERESTS}
+  <<.Interests>>
+
+  \section{REFERENCES}
+  References are available upon request.
+\stoptext
