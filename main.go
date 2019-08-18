@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 	"text/template"
 )
 
@@ -22,6 +23,7 @@ func main() {
 
 	fmap := template.FuncMap{
 		"notLastElement": notLastElement,
+		"join":           join,
 	}
 
 	// Read the JSON data
@@ -64,4 +66,10 @@ func main() {
 // or a slice is not the last.
 func notLastElement(pos, length int) bool {
 	return pos < length-1
+}
+
+// join uses strings.Join to join all string elements into
+// a single string.
+func join(s []string) string {
+	return strings.Join(s, " ")
 }

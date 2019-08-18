@@ -6,7 +6,7 @@ type Cv struct {
 	JobTitle     string         `json:"jobTitle"`
 	Contact      Contact        `json:"contact"`
 	Links        Links          `json:"links"`
-	Summary      string         `json:"summary"`
+	Summary      []string       `json:"summary"`
 	Technologies []Technologies `json:"technologies"`
 	Employment   []Experience   `json:"employment"`
 	Education    []Experience   `json:"education"`

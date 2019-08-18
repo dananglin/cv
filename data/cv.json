@@ -11,7 +11,15 @@
     "gitlab": "gitlab.com/dananglin",
     "github": "github.com/dananglin"
   },
-  "summary": "To be completed.",
+  "summary": [
+    "I am a Platform Automation Engineer with over four years of professional experience in DevOps and Platform Automation.",
+    "My experience ranges from provisioning VMs and automating software installation using Ansible and Puppet",
+    "to provisioning new Kubernetes environments using GitOps and creating Operators for the auto-provisioning and maintenance of PostgreSQL clusters on Kubernetes.",
+    "Throughout my time with Ocado Technology I have developed an interest in the Go programming language",
+    "and I would like to continue increasing my knowledge and experience in Go and use it more professionally.",
+    "I'm also keen on learning more about platform automation, platform monitoring and alerting and platform self healing.",
+    "As my career advances I aspire to use my knowledge and skills to become a respected Senior Engineer with a background in platform automation."
+  ],
   "technologies": [
     {
       "category": "Programming Languages",
