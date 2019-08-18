@@ -178,5 +178,15 @@
       }
     }
   ],
-  "interests": "To be completed..."
+  "interests": [
+    "I enjoy walking/hiking.",
+    "I have enjoyed small hikes around London,",
+    "between different towns and villages of Hertfordshire",
+    "and also along the south coast.",
+    "I have used missions in Ingress (augmented reality and location-based game) to discover",
+    "hidden gems of London and Hertfordshire including",
+    "Ellenbrook Fields in Hatfield and a hidden rail trail within Welwyn Garden City.",
+    "I mainly keep up-to-date with tech news using news aggregation sites such as Reddit and Hacker News",
+    "Currently I'm interested in decentralised web services and (in-particular) the Fediverse."
+  ]
 }

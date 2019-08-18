@@ -10,7 +10,7 @@ type Cv struct {
 	Technologies []Technologies `json:"technologies"`
 	Employment   []Experience   `json:"employment"`
 	Education    []Experience   `json:"education"`
-	Interests    string         `json:"interests"`
+	Interests    []string       `json:"interests"`
 }
 
 type Contact struct {

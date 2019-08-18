@@ -25,6 +25,7 @@
       <<if notLastElement $i $lenTech>>\TB[1mm]<<end>>
     <<end>>
     \stoptabulate
+
   \section{EXPERIENCE}
     <<- range .Employment>>
     \jobsection{<<.Company>>}{<<.Location>>}{<<.JobTitle>>}{<<.Duration.Start>> - <<.Duration.End>>}
@@ -45,8 +46,8 @@
       \stopitemize
     <<end>>
 
-  \section{OTHER INTERESTS}
-  <<.Interests>>
+  \section{HOBBIES AND INTERESTS}
+  <<join .Interests>>
 
   \section{REFERENCES}
   References are available upon request.
