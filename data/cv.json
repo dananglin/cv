@@ -89,7 +89,13 @@
         "end": "Present"
       },
       "details": [
-        "To be completed..."
+        "I've supported development tools such as GitLab and Nexus hosted in AWS by performing various upgrade and maintenance tasks for service improvements.",
+        "I’ve used CloudFormation to provision a monitoring stack for GitLab. The monitoring stack included Prometheus, Alertmanager and Grafana.",
+        "I’ve deployed new Kubernetes environments on Openstack using GitOps. These environments are used for SIT and volume testing of applications deployed on Kubernetes.",
+        "I’ve automated Elasticsearch maintenance by creating and deploying maintenance apps on Kubernetes and scheduling them using CronJob objects.",
+        "I’ve created and deployed a Postgres Operator using Metacontroller for deploying Patroni clusters onto Kubernetes.",
+        "I’ve deployed Prometheus, Alertmanager and Grafana on Kubernetes for monitoring database services including Postgres, Cassandra and Elasticsearch.",
+        "I'm currently part of the monitoring and alerting work group for the Infrastructure department."
       ]
     },
     {
