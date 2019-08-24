@@ -11,13 +11,13 @@
     "github": "github.com/dananglin"
   },
   "summary": [
-    "I am a Platform Automation Engineer with over four years of professional experience in DevOps and Platform Automation.",
+    "I have over four years of professional experience in DevOps and Platform Automation.",
     "My experience ranges from provisioning VMs and automating software installation using Ansible and Puppet",
     "to provisioning new Kubernetes environments using GitOps and creating Operators for the auto-provisioning and maintenance of PostgreSQL clusters on Kubernetes.",
     "Throughout my time with Ocado Technology I have developed an interest in the Go programming language",
     "and I would like to continue increasing my knowledge and experience in Go and use it more professionally.",
-    "I'm also keen on learning more about platform automation, platform monitoring and alerting and platform self healing.",
-    "As my career advances I aspire to use my knowledge and skills to become a respected Senior Engineer with a background in platform automation."
+    "I'm also keen on developing my knowledge on the automation, monitoring and self healing of virtual platforms.",
+    "As my career advances, I aspire to use my knowledge and skills to become a respected Senior Engineer with a background in platform automation."
   ],
   "technologies": [
     {
@@ -26,6 +26,14 @@
         "Go",
         "Bash",
         "Python"
+      ]
+    },
+    {
+      "category": "Cloud Hosting",
+      "values": [
+        "AWS",
+        "Openstack",
+        "UKCloud"
       ]
     },
     {
@@ -59,9 +67,6 @@
     {
       "category": "Other Tools, Services or Frameworks",
       "values": [
-        "AWS",
-        "Openstack",
-        "UKCloud",
         "GNU/Linux",
         "Elasticsearch",
         "Logstash",
@@ -88,11 +93,11 @@
         "end": "Present"
       },
       "details": [
-        "I've supported development tools such as GitLab and Nexus hosted in AWS by performing various upgrade and maintenance tasks for service improvements.",
-        "I’ve used CloudFormation to provision a monitoring stack for GitLab. The monitoring stack included Prometheus, Alertmanager and Grafana.",
-        "I’ve deployed new Kubernetes environments on Openstack using GitOps. These environments are used for SIT and volume testing of applications deployed on Kubernetes.",
+        "I've supported development tools such as GitLab and Nexus hosted in AWS by performing various upgrade and maintenance tasks via CloudFormation and Puppet.",
+        "I’ve used CloudFormation to provision a monitoring stack for GitLab. The monitoring stack consisted of Prometheus, Alertmanager and Grafana.",
+        "I’ve deployed new SIT Kubernetes environments on Openstack using GitOps.",
         "I’ve automated Elasticsearch maintenance by creating and deploying maintenance apps on Kubernetes and scheduling them using CronJob objects.",
-        "I’ve created and deployed a Postgres Operator using Metacontroller for deploying Patroni clusters onto Kubernetes.",
+        "I’ve created and deployed a Postgres Operator using the Metacontroller for creating and managing Patroni Postgres clusters onto Kubernetes.",
         "I’ve deployed Prometheus, Alertmanager and Grafana on Kubernetes for monitoring database services including Postgres, Cassandra and Elasticsearch.",
         "I'm currently part of the monitoring and alerting work group for the Infrastructure department."
       ]
@@ -106,8 +111,8 @@
         "end": "November, 2016"
       },
       "details": [
-        "I've built and supported Production infrastructure hosted in UKCloud (for public sector projects) and AWS (for commercial projects).",
-        "My general tasks included creating Ansible playbooks for network configuration, hardening of RedHat/CentOS VMs and software installation and configuration.",
+        "I've built and supported production infrastructure hosted in UKCloud (for public sector projects) and AWS (for commercial projects).",
+        "My general tasks included creating Ansible playbooks for network configuration, hardening of RedHat/CentOS VMs and for software installation and configuration.",
         "I've set up resilient and fault-tolerant infrastructure using tools such as HAProxy and Keepalive.",
         "I've built a cross-domain protective monitoring solution using the Elastic stack with Redis.",
         "I've installed and configured Nagios/Icinga for infrastructure monitoring.",
@@ -126,8 +131,8 @@
         "I've built and supported new development, CIT and SIT environments for new projects at the Home Office.",
         "These environments were built on UKCloud using Jenkins and UKCloud's REST API.",
         "Linux (RedHat/CentOS) virtual machines were provisioned and hardenend using Puppet and Jenkins.",
-        "I learnt how to work in an Agile environment with SCRUM; using JIRA for keeping track of my Sprint tasks.",
-        "Confluence was used for internal documentation and I used it to create documentation for new starters in the DevOps space."
+        "I've learnt how to work in an Agile environment with Scrum; using JIRA for keeping track of my sprint tasks.",
+        "I've used Confluence it to create documentation for new starters in the DevOps space."
       ]
     },
     {
