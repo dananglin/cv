@@ -6,7 +6,7 @@
       \cvtitle{<<.FirstName>> <<.LastName>>}{<<.JobTitle>>}
     \titleAndContact
       {\bf Email:} <<.Contact.Email>>\blank[none]
-      {\bf Phone:} <<.Contact.Phone>>\blank[none]
+      <<if .Contact.Phone>>{\bf Phone:} <<.Contact.Phone>>\blank[none]<<end>>
       {\bf Location:} <<.Contact.Location>>\blank[medium]
 
       {\bf GitLab:} \goto{<<.Links.GitLab>>}[url(https://<<.Links.GitLab>>)]\blank[none]

@@ -40,6 +40,12 @@ func main() {
 	}
 	log.Println("INFO: JSON unmarshalling was successful.")
 
+	// if CV_CONTACT_PHONE is set then add it to the CV
+	phone := os.Getenv("CV_CONTACT_PHONE")
+	if len(phone) > 0 {
+		cv.Contact.Phone = phone
+	}
+
 	// Create the Output tex file
 	log.Printf("INFO: Attempting to create output file %s...", cvOutputPath)
 	if err = os.MkdirAll(cvOutputDir, 0750); err != nil {
