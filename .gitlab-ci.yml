@@ -1,0 +1,47 @@
+---
+stages:
+- test
+- build
+- publish
+
+variables:
+  IMAGE_NAME: ${CI_REGISTRY}/${CI_PROJECT_PATH}/cv-builder
+  IMAGE_TAG: ${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
+
+services:
+- docker:19.03.5-dind
+
+.use-docker:
+  image: docker:19.03.5
+
+.install-deps: &install-deps
+- apk add --no-cache make
+
+test:docker-image:
+  extends: .use-docker
+  script:
+  - *install-deps
+  - make image
+  stage: test
+  only:
+    changes:
+    - docker/Dockerfile
+  except:
+    refs:
+    - master
+
+publish:docker-image:
+  extends: .use-docker
+  before_script:
+  - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}
+  after_script:
+  - docker logout ${CI_REGISTRY}
+  script:
+  - *install-deps
+  - make publish
+  stage: publish
+  only:
+    changes:
+    - docker/Dockerfile
+    refs:
+    - master@dananglin/cv
