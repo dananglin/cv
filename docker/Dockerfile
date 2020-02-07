@@ -1,4 +1,4 @@
-FROM golang:1.13.5-buster
+FROM golang:1.13.7-buster
 
 # Upgrade packages and install dependencies
 RUN \
