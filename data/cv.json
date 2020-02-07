@@ -90,16 +90,17 @@
       "jobTitle": "Platform Automation Engineer",
       "duration": {
         "start": "January, 2017",
-        "end": "Present"
+        "end": "January, 2020"
       },
       "details": [
-        "I've supported development tools such as GitLab and Nexus hosted in AWS by performing various upgrade and maintenance tasks via CloudFormation and Puppet.",
-        "I’ve used CloudFormation to provision a monitoring stack for GitLab. The monitoring stack consisted of Prometheus, Alertmanager and Grafana.",
+        "I’ve created a Postgres Operator using Go and the Metacontroller which is used to create and manage Patroni PostgreSQL clusters onto production Kubernetes environments.",
+        "I've provided assistance for creating a Cassandra Operator using Go.",
         "I’ve deployed new SIT Kubernetes environments on Openstack using GitOps.",
-        "I’ve automated Elasticsearch maintenance by creating and deploying maintenance apps on Kubernetes and scheduling them using CronJob objects.",
-        "I’ve created and deployed a Postgres Operator using the Metacontroller for creating and managing Patroni Postgres clusters onto Kubernetes.",
-        "I’ve deployed Prometheus, Alertmanager and Grafana on Kubernetes for monitoring database services including Postgres, Cassandra and Elasticsearch.",
-        "I'm currently part of the monitoring and alerting work group for the Infrastructure department."
+        "I’ve created management services on Kubernetes using CronJobs to automate the maintenance of Elasticsearch clusters.",
+        "I’ve deployed Prometheus, Alertmanager and Grafana onto Kubernetes for monitoring database services such as PostgreSQL, Cassandra and Elasticsearch.",
+        "I was part of the monitoring and alerting work group to help integrate all infrastructure monitoring stacks into a centralised monitoring service.",
+        "I've supported development tools such as GitLab and Nexus in AWS by performing various upgrade and maintenance tasks via CloudFormation and Puppet.",
+        "I’ve used AWS CloudFormation and ECS to provision a monitoring stack for GitLab."
       ]
     },
     {
@@ -130,7 +131,7 @@
       "details": [
         "I've built and supported new development, CIT and SIT environments for new projects at the Home Office.",
         "These environments were built on UKCloud using Jenkins and UKCloud's REST API.",
-        "Linux (RedHat/CentOS) virtual machines were provisioned and hardenend using Puppet and Jenkins.",
+        "Linux (RedHat/CentOS) virtual machines were provisioned and hardened using Puppet and Jenkins.",
         "I've learnt how to work in an Agile environment with Scrum; using JIRA for keeping track of my sprint tasks.",
         "I've used Confluence it to create documentation for new starters in the DevOps space."
       ]
@@ -145,7 +146,7 @@
       },
       "details": [
         "I've spent eight weeks in training to become a DevOps Consultant on behalf of QA Consulting.",
-        "I've completed a two week intensive training course on business analysis. Trainig course covered client engagement, businnes process modelling, use case modelling and process and evaluation improvements.",
+        "I've completed a two week intensive training course on business analysis. Training course covered client engagement, business process modelling, use case modelling and process and evaluation improvements.",
         "I then completed a six week hands-on training course on the fundamentals of DevOps and Continuous Integration.",
         "The DevOps training course consisted of learning about various software such as Puppet, Jenkins, Nexus, Maven, Git, Tomcat and the Atlassian tools.",
         "The training also included using Vagrant and Puppet to automate the provisioning of small CI and development environments for the continuous delivery of internal Java projects."
