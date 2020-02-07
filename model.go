@@ -41,6 +41,11 @@ type Experience struct {
 }
 
 type Duration struct {
-	Start string `json:"start"`
-	End   string `json:"end"`
+	Start Date `json:"start"`
+	End   Date `json:"end"`
+}
+
+type Date struct {
+	Year  string `json:"year"`
+	Month string `json:"month"`
 }

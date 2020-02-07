@@ -89,8 +89,14 @@
       "location": "Hatfield, Hertfordshire",
       "jobTitle": "Platform Automation Engineer",
       "duration": {
-        "start": "January, 2017",
-        "end": "January, 2020"
+        "start": {
+          "year": "2017",
+          "month": "January"
+        },
+        "end": {
+          "year": "2020",
+          "month": "January"
+        }
       },
       "details": [
         "I’ve created a Postgres Operator using Go and the Metacontroller which is used to create and manage Patroni PostgreSQL clusters onto production Kubernetes environments.",
@@ -108,8 +114,14 @@
       "location": "London",
       "jobTitle": "DevOps Consultant",
       "duration": {
-        "start": "March, 2015",
-        "end": "November, 2016"
+        "start": {
+          "year": "2015",
+          "month": "March"
+        },
+        "end": {
+          "year": "2016",
+          "month": "November"
+        }
       },
       "details": [
         "I've built and supported production infrastructure hosted in UKCloud (for public sector projects) and AWS (for commercial projects).",
@@ -125,8 +137,14 @@
       "location": "Home Office, London",
       "jobTitle": "DevOps Consultant",
       "duration": {
-        "start": "October, 2014",
-        "end": "March, 2015 "
+        "start": {
+          "year": "2014",
+          "month": "October"
+        },
+        "end": {
+          "year": "2015",
+          "month": "March"
+        }
       },
       "details": [
         "I've built and supported new development, CIT and SIT environments for new projects at the Home Office.",
@@ -141,8 +159,14 @@
       "location": "Worthing",
       "jobTitle": "Trainee DevOps Consultant",
       "duration": {
-        "start": "September, 2014",
-        "end": "October, 2014"
+        "start": {
+          "year": "2014",
+          "month": "September"
+        },
+        "end": {
+          "year": "2014",
+          "month": "October"
+        }
       },
       "details": [
         "I've spent eight weeks in training to become a DevOps Consultant on behalf of QA Consulting.",
@@ -157,8 +181,14 @@
       "location": "Reading",
       "jobTitle": "Undergraduate Researcher",
       "duration": {
-        "start": "July, 2012",
-        "end": "September, 2012"
+        "start": {
+          "year": "2012",
+          "month": "July"
+        },
+        "end": {
+          "year": "2012",
+          "month": "September"
+        }
       },
       "details": [
         "This was a summer internship where I helped developed an interactive Java application that processes Terahertz signals in order to reveal hidden details behind walls.",
@@ -175,8 +205,14 @@
       "location": "Reading",
       "qualification": "MEng (Hons) in Robotics, 2:1",
       "duration": {
-        "start": "October, 2009",
-        "end": "July, 2013"
+        "start": {
+          "year": "2009",
+          "month": "October"
+        },
+        "end": {
+          "year": "2013",
+          "month": "July"
+        }
       }
     },
     {
@@ -184,8 +220,14 @@
       "location": "London",
       "qualification": "A-Levels in Maths, Physics and Product Design",
       "duration": {
-        "start": "September, 2007",
-        "end": "July, 2009"
+        "start": {
+          "year": "2007",
+          "month": "September"
+        },
+        "end": {
+          "year": "2009",
+          "month": "July"
+        }
       }
     }
   ],
