@@ -2,3 +2,4 @@ __output/*
 !__output/cv.pdf
 tags
 notes.txt
+aspell_output

@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ASPELL_LANG='en_GB'
+ASPELL_PERSONAL_WORDLIST='./.aspell/.aspell.en.pws'
+DEFAULT_OUTPUT='aspell_output'
+
+RED='\033[1;31m'
+AMBER='\033[1;33m'
+GREEN='\033[1;32m'
+NC='\033[0m'
+
+inputFile=''
+outputFile=''
+
+usage () {
+echo "Usage:"
+echo "spellcheck [OPTION]..."
+echo
+echo "Description:"
+echo -e "\tspellcheck is a wrapper script that uses aspell to check the spelling of"
+echo -e "\tall words in a file. Any detected spelling errors are printed to screen"
+echo -e "\tand to an output file."
+echo
+echo "Options:"
+echo -e "\t-i\tinput file for spell checking."
+echo -e "\t-o\toutput file where list of spelling errors are written to."
+echo -e "\t\tThe default output file is ${DEFAULT_OUTPUT}."
+echo -e "\t-h\tprints usage."
+echo
+echo -e "Examples:"
+echo -e "\tspellcheck -i my_file.txt -o output.txt"
+echo -e "\tspellcheck -i my_file"
+}
+
+validate_args() {
+  if [ -z "$inputFile" ]; then
+    echo -e "${RED}ERROR: ${NC}Option '-i' is not set or is empty."
+    usage
+    return 1
+  fi
+
+  if [ -z "$outputFile" ]; then
+    echo -e "${AMBER}WARNING: ${NC}Option '-o' is not set or is empty. The output file will be set to ${DEFAULT_OUTPUT}"
+    outputFile=${DEFAULT_OUTPUT}
+  fi
+
+  return 0
+}
+
+spellcheck() {
+  cat ${inputFile} | aspell -d ${ASPELL_LANG} -p ${ASPELL_PERSONAL_WORDLIST} list > ${outputFile}
+
+  let spellingErrors=$( cat ${outputFile} | wc -l )
+  if [ $spellingErrors -gt 0 ]; then
+    echo
+    echo -e "${RED}ERROR: ${NC}The following spelling errors were found in ${inputFile}:"
+    cat ${outputFile}
+    return 1
+  else
+    echo
+    echo -e "${GREEN}INFO: ${NC}No spelling errors found."
+  fi
+
+  return 0
+}
+
+while getopts 'i:o:h' flag; do
+  case "${flag}" in
+    i) inputFile=${OPTARG} ;;
+    o) outputFile=${OPTARG} ;;
+    h) usage && exit 0 ;;
+    *) usage && exit 2 ;;
+  esac
+done
+
+validate_args || exit 1
+spellcheck || exit 1

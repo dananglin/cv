@@ -2,17 +2,7 @@
 .use-cv-builder:
   image: ${IMAGE_NAME}:master-8b42c9fd
 
-test:pdf:
-  artifacts:
-    expire_in: 1 hour
-    paths:
-    - __output/cv.pdf
-  extends: .use-cv-builder
-  before_script:
-  - make clean
-  stage: test
-  script:
-  - make
+.test-conditions:
   only:
     refs:
     - merge_requests
@@ -20,6 +10,34 @@ test:pdf:
     changes:
     - docker/Dockerfile
     - __output/*
+
+test:spellcheck:
+  before_script:
+  - apt-get update
+  - apt-get -y install aspell make
+  extends:
+  - .test-conditions
+  image: ubuntu:18.04
+  stage: test
+  script:
+  - make spellcheck
+  only:
+    refs:
+    - merge_requests
+
+test:pdf:
+  artifacts:
+    expire_in: 1 hour
+    paths:
+    - __output/cv.pdf
+  extends:
+  - .use-cv-builder
+  - .test-conditions
+  before_script:
+  - make clean
+  stage: test
+  script:
+  - make
 
 publish:pdf:
   extends: .use-cv-builder
