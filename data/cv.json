@@ -7,16 +7,17 @@
     "location": "Hertfordshire, UK"
   },
   "links": {
-    "gitlab": "gitlab.com/dananglin",
-    "github": "github.com/dananglin"
+    "gitlab": "https://gitlab.com/dananglin",
+    "github": "https://github.com/dananglin"
   },
   "summary": [
     "I have over five years of professional experience in DevOps and Platform Automation.",
     "My experience ranges from provisioning virtual machines and automating software installation using Ansible and Puppet",
     "to provisioning new Kubernetes environments using GitOps and creating Operators for the auto-provisioning and maintenance of PostgreSQL clusters on Kubernetes.",
-    "Throughout my time at Ocado Technology I have used Go to build automated services in Kubernetes and have been training myself to develop",
+    "At my time with Ocado Technology I've used Go to build automated services in Kubernetes and I've been training myself to develop",
     "my skills and understanding of the language.",
-    "I am very keen on continuing using Go more professionally and I am aiming to transition my career from DevOps Engineering to Software Engineering."
+    "I am very keen on continuing using Go more professionally as I continue to grow in my career as a Software Engineer",
+    "within the Automation and Infrastructure space."
   ],
   "technologies": [
     {

@@ -9,8 +9,8 @@
       <<if .Contact.Phone>>{\bf Phone:} <<.Contact.Phone>>\blank[none]<<end>>
       {\bf Location:} <<.Contact.Location>>\blank[medium]
 
-      {\bf GitLab:} \goto{<<.Links.GitLab>>}[url(https://<<.Links.GitLab>>)]\blank[none]
-      {\bf GitHub:} \goto{<<.Links.GitHub>>}[url(https://<<.Links.GitHub>>)]\blank[none]
+      <<if .Links.GitLab>>{\bf GitLab:} <<.Links.GitLab>>\blank[none]<<end>>
+      <<if .Links.GitHub>>{\bf GitHub:} <<.Links.GitHub>>\blank[none]<<end>>
   \stoptitleAndContact
 
   \section{SUMMARY}
