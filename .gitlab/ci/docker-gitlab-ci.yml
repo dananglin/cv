@@ -1,10 +1,10 @@
 ---
 .docker-dind-service:
   services:
-  - docker:19.03.5-dind
+  - docker:19.03.12-dind
 
 .use-docker:
-  image: docker:19.03.5
+  image: docker:19.03.12
 
 .install-deps: &install-deps
 - apk add --no-cache make
