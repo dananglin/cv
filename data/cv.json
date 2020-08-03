@@ -85,6 +85,19 @@
   ],
   "employment": [
     {
+      "company": "Experian",
+      "location": "Nottingham",
+      "jobTitle": "Platform Engineer (SRE)",
+      "duration": {
+        "start": {
+          "year": "2020",
+          "month": "April"
+        },
+        "present": "yes"
+      },
+      "details": []
+    },
+    {
       "company": "Ocado Technology",
       "location": "Hatfield, Hertfordshire",
       "jobTitle": "Platform Automation Engineer",
