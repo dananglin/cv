@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -22,8 +23,9 @@ func main() {
 	cvOutputPath := cvOutputDir + cvOutputFileName
 
 	fmap := template.FuncMap{
-		"notLastElement": notLastElement,
-		"join":           join,
+		"notLastElement":   notLastElement,
+		"join":             join,
+		"durationToString": durationToString,
 	}
 
 	// Read the JSON data
@@ -78,4 +80,20 @@ func notLastElement(pos, length int) bool {
 // a single string.
 func join(s []string) string {
 	return strings.Join(s, " ")
+}
+
+// durationToString outputs the employment/education
+// duration as a formatted string.
+func durationToString(d Duration) string {
+	start := fmt.Sprintf("%s, %s", d.Start.Month, d.Start.Year)
+	present := strings.ToLower(d.Present)
+	end := ""
+
+	if present == "yes" || present == "true" {
+		end = "Present"
+	} else {
+		end = fmt.Sprintf("%s, %s", d.End.Month, d.End.Year)
+	}
+
+	return start + " - " + end
 }

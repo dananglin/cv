@@ -28,7 +28,7 @@
 
   \section{EXPERIENCE}
     <<- range .Employment>>
-    \jobsection{<<.Company>>}{<<.Location>>}{<<.JobTitle>>}{<<.Duration.Start.Month>>, <<.Duration.Start.Year>> - <<.Duration.End.Month>>, <<.Duration.End.Year>>}
+    \jobsection{<<.Company>>}{<<.Location>>}{<<.JobTitle>>}{<<durationToString .Duration>>}
       \startitemize
       <<range .Details>>
         \item <<.>>
@@ -38,7 +38,7 @@
 
   \section{EDUCATION}
     <<range .Education ->>
-    \jobsection{<<.School>>}{<<.Location>>}{<<.Qualification>>}{<<.Duration.Start.Month>>, <<.Duration.Start.Year>> - <<.Duration.End.Month>>, <<.Duration.End.Year>>}
+    \jobsection{<<.School>>}{<<.Location>>}{<<.Qualification>>}{<<durationToString .Duration>>}
       \startitemize
       <<range .Details>>
         \item <<.>>
