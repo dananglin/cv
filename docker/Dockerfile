@@ -4,19 +4,20 @@ FROM golang:1.14.6-buster
 RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-        fonts-crosextra-carlito \
-        rsync \
+        fonts-crosextra-carlito=20130920-1 \
+        rsync=3.1.3-6 \
     && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    mkdir /opt/context
+
+WORKDIR /opt/context
 
 # Install ConTeXt standalone
 RUN \
-    mkdir /opt/context && \
-    cd /opt/context && \
-    curl -LO http://minimals.contextgarden.net/setup/first-setup.sh && \
-    sh ./first-setup.sh \
+    curl -L http://minimals.contextgarden.net/setup/first-setup.sh -o /opt/context/first-setup.sh && \
+    sh /opt/context/first-setup.sh \
         --context=current \
         --engine=luatex \
     && \

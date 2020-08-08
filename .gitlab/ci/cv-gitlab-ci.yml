@@ -1,15 +1,28 @@
 ---
 .use-cv-builder:
-  image: ${IMAGE_NAME}:master-8b42c9fd
+  image: ${IMAGE_NAME}:master-cb8a29c7
 
 .test-conditions:
-  only:
-    refs:
-    - merge_requests
-  except:
+  rules:
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    when: always
+  - if:
     changes:
     - docker/Dockerfile
     - __output/*
+    when: never
+
+.publish-conditions:
+  rules:
+  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
+    when: always
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    when: never
+  - if:
+    changes:
+    - docker/Dockerfile
+    - __output/*
+    when: never
 
 test:spellcheck:
   before_script:
@@ -21,9 +34,6 @@ test:spellcheck:
   stage: test
   script:
   - make spellcheck
-  only:
-    refs:
-    - merge_requests
 
 test:pdf:
   artifacts:
@@ -33,14 +43,14 @@ test:pdf:
   extends:
   - .use-cv-builder
   - .test-conditions
-  before_script:
-  - make clean
   stage: test
   script:
-  - make
+  - make clean pdf
 
 publish:pdf:
-  extends: .use-cv-builder
+  extends: 
+  - .use-cv-builder
+  - .publish-conditions
   before_script:
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
@@ -50,18 +60,10 @@ publish:pdf:
   - git remote set-url origin git@gitlab.com:${CI_PROJECT_PATH}.git
   - git config --global user.email "${GITLAB_USER_EMAIL}"
   - git config --global user.name "${GITLAB_USER_NAME}"
-  - make clean
   stage: publish
   script:
-  - make
+  - make clean pdf
   - git checkout master
   - git add __output/cv.pdf
   - 'git commit -m "auto: update CV."'
   - git push origin master
-  only:
-    refs:
-    - master@dananglin/cv
-  except:
-    changes:
-    - docker/Dockerfile
-    - __output/*
