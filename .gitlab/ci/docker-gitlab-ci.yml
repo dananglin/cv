@@ -1,4 +1,7 @@
 ---
+#--------------------------------------------------------#
+# Hidden job templates for Docker build/publish pipeline #
+#--------------------------------------------------------#
 .docker-build-setup:
   image: docker:19.03.12
   services:
@@ -16,7 +19,13 @@
   stage: test
   extends: .docker-build-setup
 
-.docker-publish:
+.docker-test-rules:
+  rules:
+  - changes:
+    - "docker/Dockerfile"
+    when: always
+
+.docker-publish-pre-post:
   stage: publish
   extends: .docker-build-setup
   before_script:
@@ -25,34 +34,32 @@
   after_script:
   - docker logout ${CI_REGISTRY}
 
-.test-docker-rules:
-  rules:
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    changes:
-    - "docker/Dockerfile"
-    when: always
-
-test:dockerfile:lint:
-  extends:
-  - .dockerfile-lint
-  - .test-docker-rules
-
-test:docker:build:
-  extends:
-  - .dockerbuild-test
-  - .test-docker-rules
-  script:
-  - make image
-
-publish:docker-image:
-  extends:
-  - .docker-publish
-  script:
-  - make publish
+.docker-publish-rules:
   rules:
   - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
     changes:
     - "docker/Dockerfile"
     when: always
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    when: never
+
+#------------------------------------------------#
+# Visible jobs for Docker build/publish pipeline #
+#------------------------------------------------#
+
+test:dockerfile:lint:
+  extends:
+  - .dockerfile-lint
+  - .docker-test-rules
+
+test:docker:build:
+  extends:
+  - .dockerbuild-test
+  - .docker-test-rules
+  script:
+  - make image
+
+publish:docker-image:
+  extends:
+  - .docker-publish-pre-post
+  - .docker-publish-rules
+  script:
+  - make publish

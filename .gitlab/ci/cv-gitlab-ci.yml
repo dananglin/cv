@@ -1,35 +1,37 @@
 ---
+#--------------------------------------------#
+# Hidden job templates for CV build pipeline #
+#--------------------------------------------#
 .use-cv-builder:
   image: ${IMAGE_NAME}:master-cb8a29c7
 
-.test-conditions:
+.cv-test-rules:
   rules:
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    when: always
-  - if:
-    changes:
-    - docker/Dockerfile
-    - __output/*
+  - changes:
+    - "docker/Dockerfile"
+    - "__output/*"
     when: never
+  - when: always
 
-.publish-conditions:
+.cv-publish-rules:
   rules:
   - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
     when: always
-  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  - changes:
+    - "docker/Dockerfile"
+    - "__output/*"
     when: never
-  - if:
-    changes:
-    - docker/Dockerfile
-    - __output/*
-    when: never
+
+#------------------------------------#
+# Visible jobs for CV build pipeline #
+#------------------------------------#
 
 test:spellcheck:
   before_script:
   - apt-get update
   - apt-get -y install aspell make
   extends:
-  - .test-conditions
+  - .cv-test-rules
   image: ubuntu:18.04
   stage: test
   script:
@@ -42,7 +44,7 @@ test:pdf:
     - __output/cv.pdf
   extends:
   - .use-cv-builder
-  - .test-conditions
+  - .cv-test-rules
   stage: test
   script:
   - make clean pdf
@@ -50,7 +52,7 @@ test:pdf:
 publish:pdf:
   extends: 
   - .use-cv-builder
-  - .publish-conditions
+  - .cv-publish-rules
   before_script:
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
