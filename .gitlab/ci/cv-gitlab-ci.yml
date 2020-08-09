@@ -24,6 +24,10 @@
   tags:
   - dananglin-general
 
+.release-tags:
+  tags:
+    - dananglin-cv-release
+
 #------------------------------------#
 # Visible jobs for CV build pipeline #
 #------------------------------------#
@@ -83,8 +87,8 @@ build:pdf:
 
 release:pdf:private:
   extends:
-  - .default-tags
-  image: alpine:3.12
+  - .use-cv-builder
+  - .release-tags
   needs:
   - job: "test:spellcheck"
     artifacts: false
