@@ -40,9 +40,18 @@ test:spellcheck:
   - .cv-default-job-rules
   - .default-tags
   - .use-cv-builder
-  stage: test
   script:
   - go run mage.go spellcheck
+  stage: test
+
+test:pdf:
+  extends:
+  - .cv-default-job-rules
+  - .default-tags
+  - .use-cv-builder
+  script:
+  - go run mage.go pdf
+  stage: test
 
 build:pdf:
   artifacts:
@@ -50,6 +59,7 @@ build:pdf:
     name: cv-DanAnglin-${CI_COMMIT_REF_NAME}
     paths:
     - __output/cv.pdf
+    - build_job_id
   extends:
   - .cv-default-job-rules
   - .default-tags
@@ -57,8 +67,11 @@ build:pdf:
   needs:
   - job: "test:spellcheck"
     artifacts: false
+  - job: "test:pdf"
+    artifacts: false
   script:
   - go run mage.go pdf
+  - echo "${CI_JOB_ID}" > build_job_id
   stage: build
 
 #publish:pdf:
@@ -83,7 +96,18 @@ build:pdf:
 #  - 'git commit -m "auto: [skip ci] update CV."'
 #  - git push origin master
 
-#release:pdf:online:
+release:pdf:online:
+  extends:
+  - .release-tags
+  image: alpine:3.12
+  needs:
+  - job: "build:pdf"
+    artifacts: true
+  script:
+  - ls -la
+  stage: publish
+  variables:
+    GIT_STRATEGY: "none"
 
 release:pdf:private:
   extends:
@@ -91,6 +115,8 @@ release:pdf:private:
   - .release-tags
   needs:
   - job: "test:spellcheck"
+    artifacts: false
+  - job: "test:pdf"
     artifacts: false
   script:
   - go run mage.go pdf
