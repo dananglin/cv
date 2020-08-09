@@ -47,7 +47,6 @@ of dependencies that you'll need to install:
     $ OSFONTDIR=/usr/share/fonts
     $ mtxrun --script fonts --reload
     ```
-- **Make** - This should be available on all Unix distributions.
 
 Once the dependencies are installed you can follow the
 [Generating the PDF Document](#generating-the-pdf-document) section below.
