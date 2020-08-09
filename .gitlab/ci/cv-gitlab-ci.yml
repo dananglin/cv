@@ -5,7 +5,7 @@
 .use-cv-builder:
   image: ${IMAGE_NAME}:master-cb8a29c7
 
-.cv-test-rules:
+.cv-default-job-rules:
   rules:
   - changes:
     - "docker/Dockerfile"
@@ -20,6 +20,10 @@
     - "docker/Dockerfile"
     when: never
 
+.default-tags:
+  tags:
+  - dananglin-general
+
 #------------------------------------#
 # Visible jobs for CV build pipeline #
 #------------------------------------#
@@ -29,41 +33,65 @@ test:spellcheck:
   - apt-get update
   - apt-get -y install aspell aspell-en
   extends:
-  - .cv-test-rules
+  - .cv-default-job-rules
+  - .default-tags
   - .use-cv-builder
   stage: test
   script:
   - go run mage.go spellcheck
 
-test:pdf:
+build:pdf:
   artifacts:
-    expire_in: 1 hour
+    expire_in: "30 minutes"
+    name: cv-DanAnglin-${CI_COMMIT_REF_NAME}
     paths:
     - __output/cv.pdf
   extends:
+  - .cv-default-job-rules
+  - .default-tags
   - .use-cv-builder
-  - .cv-test-rules
-  stage: test
+  needs:
+  - job: "test:spellcheck"
+    artifacts: false
   script:
   - go run mage.go pdf
+  stage: build
 
-publish:pdf:
-  extends: 
-  - .use-cv-builder
-  - .cv-publish-rules
-  before_script:
-  - eval $(ssh-agent -s)
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-  - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-  - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-  - chmod 0400 ~/.ssh/known_hosts
-  - git remote set-url origin git@gitlab.com:${CI_PROJECT_PATH}.git
-  - git config --global user.email "${GITLAB_USER_EMAIL}"
-  - git config --global user.name "${GITLAB_USER_NAME}"
-  stage: publish
+#publish:pdf:
+#  extends:
+#  - .cv-publish-rules
+#  - .default-tags
+#  - .use-cv-builder
+#  before_script:
+#  - eval $(ssh-agent -s)
+#  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+#  - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+#  - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+#  - chmod 0400 ~/.ssh/known_hosts
+#  - git remote set-url origin git@gitlab.com:${CI_PROJECT_PATH}.git
+#  - git config --global user.email "${GITLAB_USER_EMAIL}"
+#  - git config --global user.name "${GITLAB_USER_NAME}"
+#  stage: publish
+#  script:
+#  - go run mage.go pdf
+#  - git checkout master
+#  - git add __output/cv.pdf
+#  - 'git commit -m "auto: [skip ci] update CV."'
+#  - git push origin master
+
+#release:pdf:online:
+
+release:pdf:private:
+  extends:
+  - .default-tags
+  image: alpine:3.12
+  needs:
+  - job: "build:pdf"
+    artifacts: true
   script:
-  - go run mage.go pdf
-  - git checkout master
-  - git add __output/cv.pdf
-  - 'git commit -m "auto: [skip ci] update CV."'
-  - git push origin master
+  - mv __output/cv.pdf ${CV_DEPLOY_DIR}/${RELEASE_CV_FILENAME}
+  stage: publish
+  variables:
+    CV_DEPLOY_DIR: "/CV"
+    CV_CONTACT_PHONE: $RELEASE_CV_CONTACT_PHONE
+    GIT_STRATEGY: "none"
