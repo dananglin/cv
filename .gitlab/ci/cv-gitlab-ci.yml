@@ -12,13 +12,13 @@
     when: never
   - when: always
 
-.cv-publish-rules:
-  rules:
-  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
-    when: always
-  - changes:
-    - "docker/Dockerfile"
-    when: never
+#.cv-publish-rules:
+#  rules:
+#  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
+#    when: always
+#  - changes:
+#    - "docker/Dockerfile"
+#    when: never
 
 .default-tags:
   tags:
@@ -42,7 +42,7 @@ test:spellcheck:
 
 build:pdf:
   artifacts:
-    expire_in: "30 minutes"
+    expire_in: "10 minutes"
     name: cv-DanAnglin-${CI_COMMIT_REF_NAME}
     paths:
     - __output/cv.pdf
@@ -86,12 +86,12 @@ release:pdf:private:
   - .default-tags
   image: alpine:3.12
   needs:
-  - job: "build:pdf"
-    artifacts: true
+  - job: "test:spellcheck"
+    artifacts: false
   script:
+  - go run mage.go pdf
   - mv __output/cv.pdf ${CV_DEPLOY_DIR}/${RELEASE_CV_FILENAME}
   stage: publish
   variables:
     CV_DEPLOY_DIR: "/CV"
     CV_CONTACT_PHONE: $RELEASE_CV_CONTACT_PHONE
-    GIT_STRATEGY: "none"
