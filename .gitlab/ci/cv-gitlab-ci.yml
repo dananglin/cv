@@ -27,13 +27,13 @@
 test:spellcheck:
   before_script:
   - apt-get update
-  - apt-get -y install aspell make
+  - apt-get -y install aspell aspell-en
   extends:
   - .cv-test-rules
-  image: ubuntu:18.04
+  - .use-cv-builder
   stage: test
   script:
-  - make spellcheck
+  - go run mage.go spellcheck
 
 test:pdf:
   artifacts:
@@ -45,7 +45,7 @@ test:pdf:
   - .cv-test-rules
   stage: test
   script:
-  - make clean pdf
+  - go run mage.go pdf
 
 publish:pdf:
   extends: 
@@ -62,7 +62,7 @@ publish:pdf:
   - git config --global user.name "${GITLAB_USER_NAME}"
   stage: publish
   script:
-  - make clean pdf
+  - go run mage.go pdf
   - git checkout master
   - git add __output/cv.pdf
   - 'git commit -m "auto: [skip ci] update CV."'
