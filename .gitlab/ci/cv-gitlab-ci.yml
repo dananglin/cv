@@ -7,9 +7,6 @@
 
 .cv-default-job-rules:
   rules:
-  - changes:
-    - "docker/Dockerfile"
-    when: never
   - when: always
 
 .cv-release-rules:
