@@ -12,13 +12,11 @@
     when: never
   - when: always
 
-#.cv-publish-rules:
-#  rules:
-#  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
-#    when: always
-#  - changes:
-#    - "docker/Dockerfile"
-#    when: never
+.cv-release-rules:
+  rules:
+  #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
+  - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]{4}(.[0-9]{2}){2}$/ && $CI_PROJECT_PATH == "dananglin/cv"'
+    when: always
 
 .default-tags:
   tags:
@@ -26,7 +24,7 @@
 
 .release-tags:
   tags:
-    - dananglin-cv-release
+  - dananglin-cv-release
 
 #------------------------------------#
 # Visible jobs for CV build pipeline #
@@ -98,6 +96,7 @@ build:pdf:
 
 release:pdf:online:
   extends:
+  - .cv-release-rules
   - .release-tags
   image: alpine:3.12
   needs:
@@ -111,8 +110,9 @@ release:pdf:online:
 
 release:pdf:private:
   extends:
-  - .use-cv-builder
+  - .cv-release-rules
   - .release-tags
+  - .use-cv-builder
   needs:
   - job: "test:spellcheck"
     artifacts: false
