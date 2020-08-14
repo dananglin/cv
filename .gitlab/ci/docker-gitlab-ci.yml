@@ -21,7 +21,8 @@
 
 .docker-test-rules:
   rules:
-  - changes:
+  - if: '$CI_COMMIT_BRANCH'
+    changes:
     - "docker/Dockerfile"
     when: always
   - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]{4}(.[0-9]{2}){2}$/'
@@ -42,8 +43,6 @@
     changes:
     - "docker/Dockerfile"
     when: always
-  - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]{4}(.[0-9]{2}){2}$/'
-    when: never
 
 #------------------------------------------------#
 # Visible jobs for Docker build/publish pipeline #
