@@ -11,7 +11,6 @@
 
 .cv-release-rules:
   rules:
-  #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
   - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]{4}(.[0-9]{2}){2}$/ && $CI_PROJECT_PATH == "dananglin/cv"'
     when: always
 
@@ -50,13 +49,33 @@ test:pdf:
 
 build:pdf:
   artifacts:
-    expire_in: "10 minutes"
-    name: cv-DanAnglin-${CI_COMMIT_REF_NAME}
+    expire_in: "30 minutes"
     paths:
     - __output/cv.pdf
+  extends:
+  - .default-tags
+  - .use-cv-builder
+  needs:
+  - job: "test:spellcheck"
+    artifacts: false
+  - job: "test:pdf"
+    artifacts: false
+  rules:
+  - if: '$CI_MERGE_REQUEST_IID'
+    when: always
+  script:
+  - go run mage.go pdf
+  stage: build
+
+build:pdf-for-publish:
+  artifacts:
+    expire_in: "1 hour"
+    name: cv-DanAnglin-${CI_COMMIT_REF_NAME}
+    paths:
+    - ${RELEASE_CV_FILENAME}
     - build_job_id
   extends:
-  - .cv-default-job-rules
+  - .cv-release-rules
   - .default-tags
   - .use-cv-builder
   needs:
@@ -66,46 +85,35 @@ build:pdf:
     artifacts: false
   script:
   - go run mage.go pdf
+  - mv __output/cv.pdf ${RELEASE_CV_FILENAME}
   - echo "${CI_JOB_ID}" > build_job_id
   stage: build
 
-#publish:pdf:
-#  extends:
-#  - .cv-publish-rules
-#  - .default-tags
-#  - .use-cv-builder
-#  before_script:
-#  - eval $(ssh-agent -s)
-#  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-#  - mkdir -p ~/.ssh && chmod 700 ~/.ssh
-#  - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-#  - chmod 0400 ~/.ssh/known_hosts
-#  - git remote set-url origin git@gitlab.com:${CI_PROJECT_PATH}.git
-#  - git config --global user.email "${GITLAB_USER_EMAIL}"
-#  - git config --global user.name "${GITLAB_USER_NAME}"
-#  stage: publish
-#  script:
-#  - go run mage.go pdf
-#  - git checkout master
-#  - git add __output/cv.pdf
-#  - 'git commit -m "auto: [skip ci] update CV."'
-#  - git push origin master
-
-release:pdf:online:
+publish:pdf:online:
+  before_script:
+  - export BUILD_JOB_ID=$( cat build_job_id )
   extends:
   - .cv-release-rules
   - .release-tags
-  image: alpine:3.12
+  image: registry.gitlab.com/gitlab-org/release-cli:v0.3.0
   needs:
-  - job: "build:pdf"
+  - job: "build:pdf-for-publish"
     artifacts: true
   script:
-  - ls -la
-  stage: publish
+  - 'echo "Publishing CV for release ${CI_COMMIT_REF_NAME}"'
+  - >
+    release-cli create --name "CV - ${CI_COMMIT_REF_NAME}"
+  --description "CV published with the release-cli tool for release version ${CI_COMMIT_REF_NAME}"
+  --tag-name "${CI_COMMIT_REF_NAME}"
+  --ref "${CI_COMMIT_REF_NAME}"
+  --assets-links-name "${RELEASE_CV_FILENAME}"
+  --assets-links-url "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${BUILD_JOB_ID}/artifacts/${RELEASE_CV_FILENAME}"
+  stage: "publish"
   variables:
     GIT_STRATEGY: "none"
 
-release:pdf:private:
+# Private releases rebuilds the CV with the extra details.
+publish:pdf:private:
   extends:
   - .cv-release-rules
   - .release-tags
