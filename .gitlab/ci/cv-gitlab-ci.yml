@@ -103,11 +103,11 @@ publish:pdf:online:
   - 'echo "Publishing CV for release ${CI_COMMIT_REF_NAME}"'
   - >
     release-cli create --name "CV - ${CI_COMMIT_REF_NAME}"
-  --description "CV published with the release-cli tool for release version ${CI_COMMIT_REF_NAME}"
-  --tag-name "${CI_COMMIT_REF_NAME}"
-  --ref "${CI_COMMIT_REF_NAME}"
-  --assets-links-name "${RELEASE_CV_FILENAME}"
-  --assets-links-url "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${BUILD_JOB_ID}/artifacts/${RELEASE_CV_FILENAME}"
+    --description "CV published with the release-cli tool for release version ${CI_COMMIT_REF_NAME}"
+    --tag-name "${CI_COMMIT_REF_NAME}"
+    --ref "${CI_COMMIT_REF_NAME}"
+    --assets-links-name "${RELEASE_CV_FILENAME}"
+    --assets-links-url "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/jobs/${BUILD_JOB_ID}/artifacts/${RELEASE_CV_FILENAME}"
   stage: "publish"
   variables:
     GIT_STRATEGY: "none"
