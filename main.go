@@ -12,7 +12,7 @@ import (
 
 var (
 	cvDataPath       string = "data/cv.json"
-	cvTemplateDir    string = "template/"
+	cvTemplateDir    string = "template/tex/"
 	cvOutputDir      string = "__output/"
 	cvOutputFileName string = "cv.tex"
 )
@@ -62,7 +62,7 @@ func main() {
 
 	// Execute template engine and produce the resulting TEX file
 	log.Println("INFO: Attempting template execution...")
-	t := template.Must(template.New("cv.tex.tmpl").Funcs(fmap).Delims("<<", ">>").ParseGlob(cvTemplateDir + "*.tex.tmpl"))
+	t := template.Must(template.New("cv.tmpl.tex").Funcs(fmap).Delims("<<", ">>").ParseGlob(cvTemplateDir + "*.tmpl.tex"))
 
 	if err = t.Execute(output, cv); err != nil {
 		log.Fatalf("ERROR: Unable to execute the CV template. %s", err.Error())
