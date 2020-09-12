@@ -1,4 +1,4 @@
-package main
+package helpers
 
 type Cv struct {
 	FirstName    string         `json:"firstName"`
