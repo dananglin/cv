@@ -1,7 +1,7 @@
 {
   "firstName": "Dan",
   "lastName": "Anglin",
-  "jobTitle": "Platform Automation Engineer",
+  "jobTitle": "Platform Engineer (SRE)",
   "contact": {
     "email": "d.n.i.anglin@gmail.com",
     "location": "Hertfordshire, UK"
@@ -12,12 +12,13 @@
   },
   "summary": [
     "I have over five years of professional experience in DevOps and Platform Automation.",
-    "My experience ranges from provisioning virtual machines and automating software installation using Ansible and Puppet",
-    "to provisioning new Kubernetes environments using GitOps and creating Operators for the auto-provisioning and maintenance of PostgreSQL clusters on Kubernetes.",
-    "At my time with Ocado Technology I've used Go to build automated services in Kubernetes and I've been training myself to develop",
-    "my skills and understanding of the language.",
-    "I am very keen on continuing using Go more professionally as I continue to grow in my career as a Software Engineer",
-    "within the Automation and Infrastructure space."
+    "My experience ranges from provisioning virtual machines and automating",
+    "software installation using Ansible and Puppet, to provisioning new Kubernetes",
+    "environments using GitOps and creating Operators for the auto provisioning and",
+    "maintenance of PostgreSQL clusters on Kubernetes.",
+    "I have enjoyed using Go to build automated services in Kubernetes and I am keen on",
+    "using Go more professionally as well as learning new skills and",
+    "technologies as I continue to grow in my career as a Software Engineer."
   ],
   "technologies": [
     {
@@ -49,9 +50,7 @@
       "values": [
         "Git",
         "GitLab",
-        "Gitea",
         "GitLab CI",
-        "Drone",
         "Nexus",
         "Jenkins"
       ]
@@ -65,21 +64,25 @@
       ]
     },
     {
+      "category": "Configuration Management",
+      "values": [
+        "Ansible",
+        "Puppet"
+      ]
+    },
+    {
       "category": "Other Tools, Services or Frameworks",
       "values": [
         "GNU/Linux",
+        "HashiCorp Terraform",
+        "HashiCorp Vault",
         "Elasticsearch",
         "Logstash",
         "Fluentd",
         "Kibana",
-        "Ansible",
-        "Puppet",
-        "OpenAPI v3",
         "PostgreSQL",
-        "HAProxy",
         "Kanban",
-        "Scrum",
-        "JIRA"
+        "Scrum"
       ]
     }
   ],
@@ -95,7 +98,12 @@
         },
         "present": "yes"
       },
-      "details": []
+      "details": [
+        "Managed production AWS cloud infrastructure and hosted platforms using Terraform.",
+        "Managed secret and sensitive data using HashiCorp Vault and Terraform.",
+        "General support for development teams.",
+        "Helped onboard new team members to the team."
+      ]
     },
     {
       "company": "Ocado Technology",
@@ -112,14 +120,13 @@
         }
       },
       "details": [
-        "I've created a Postgres Operator using Go and the Metacontroller which is used to create and manage Patroni PostgreSQL clusters onto production Kubernetes environments.",
-        "I've provided assistance for creating a Cassandra Operator using Go.",
-        "I've deployed new SIT Kubernetes environments on Openstack using GitOps.",
-        "I've created management services on Kubernetes using CronJobs to automate the maintenance of Elasticsearch clusters.",
-        "I've deployed Prometheus, Alertmanager and Grafana onto Kubernetes for monitoring database services such as PostgreSQL, Cassandra and Elasticsearch.",
-        "I was part of the monitoring and alerting work group to help integrate all infrastructure monitoring stacks into a centralised monitoring service.",
-        "I've supported development tools such as GitLab and Nexus in AWS by performing various upgrade and maintenance tasks via CloudFormation and Puppet.",
-        "I've used AWS CloudFormation and ECS to provision a monitoring stack for GitLab."
+        "Created a Postgres Operator using Go and the Metacontroller for managing Patroni PostgreSQL clusters on Kubernetes.",
+        "Provided assistance for creating a Cassandra Operator using Go.",
+        "Deployed new SIT Kubernetes environments on Openstack using GitOps.",
+        "Created satellite services on Kubernetes using CronJobs to automate the maintenance of Elasticsearch clusters.",
+        "Deployed Prometheus, Alertmanager and Grafana onto Kubernetes for monitoring database services such as PostgreSQL, Cassandra and Elasticsearch.",
+        "Helped integrate infrastructure monitoring stacks into a centralised monitoring service as a member of the monitoring and alerting working group.",
+        "Managed development tools such as GitLab and Nexus using AWS ECS, AWS CloudFormation and Puppet."
       ]
     },
     {
@@ -137,12 +144,12 @@
         }
       },
       "details": [
-        "I've built and supported production infrastructure hosted in UKCloud (for public sector projects) and AWS (for commercial projects).",
-        "My general tasks included creating Ansible playbooks for network configuration, hardening of RedHat/CentOS virtual machines and for software installation and configuration.",
-        "I've set up resilient and fault-tolerant infrastructure using tools such as HAProxy and Keepalive.",
-        "I've built a cross-domain protective monitoring solution using the Elastic stack with Redis.",
-        "I've installed and configured Nagios/Icinga for infrastructure monitoring.",
-        "I was involved in setting up the production Docker environment for a government website."
+        "Managed production infrastructure hosted in UKCloud (for public sector clients) and AWS (for private sector clients).",
+        "Created Ansible playbooks for network configuration, RedHat/CentOS OS hardening and software installation and configuration.",
+        "Created resilient and fault-tolerant infrastructure using tools such as HAProxy and Keepalive.",
+        "Created a cross-domain protective monitoring solution using the Elastic stack with Redis.",
+        "Installed and configured Nagios/Icinga for infrastructure monitoring.",
+        "Helped create a production Docker environment for a client website."
       ]
     },
     {
@@ -160,11 +167,11 @@
         }
       },
       "details": [
-        "I've built and supported new development, CIT and SIT environments for new projects at the Home Office.",
+        "Built and supported new development, CIT and SIT environments for new projects at the Home Office.",
         "These environments were built on UKCloud using Jenkins and UKCloud's REST API.",
         "Linux (RedHat/CentOS) virtual machines were provisioned and hardened using Puppet and Jenkins.",
-        "I've learnt how to work in an Agile environment with Scrum; using JIRA for keeping track of my sprint tasks.",
-        "I've used Confluence it to create documentation for new starters in the DevOps space."
+        "Learnt how to work in an Agile environment with Scrum; using JIRA for keeping track of my sprint tasks.",
+        "Created documentation for new starters using Confluence."
       ]
     },
     {
@@ -182,11 +189,10 @@
         }
       },
       "details": [
-        "I've spent eight weeks in training to become a DevOps Consultant on behalf of QA Consulting.",
-        "I've completed a two week intensive training course on business analysis. Training course covered client engagement, business process modelling, use case modelling and process and evaluation improvements.",
-        "I then completed a six week hands-on training course on the fundamentals of DevOps and Continuous Integration.",
-        "The DevOps training course consisted of learning about various software such as Puppet, Jenkins, Nexus, Maven, Git, Tomcat and the Atlassian tools.",
-        "The training also included using Vagrant and Puppet to automate the provisioning of small CI and development environments for the continuous delivery of internal Java projects."
+        "Completed a two week intensive training course on business analysis. The course covered client engagement, business process modelling, use case modelling and process and evaluation improvements.",
+        "Completed a six week hands-on training course on the fundamentals of DevOps and Continuous Integration.",
+        "Learnt about various DevOps/CI software including Puppet, Jenkins, Nexus, Maven, Git, Tomcat and the Atlassian tools.",
+        "Used Vagrant and Puppet to provision small CI and development environments for the continuous delivery of internal Java projects."
       ]
     },
     {
@@ -252,8 +258,8 @@
     "Ingress (an augmented reality and location-based game) has helped me to discover",
     "hidden gems of London and Hertfordshire including",
     "Ellenbrook Fields in Hatfield and a hidden rail trail within Welwyn Garden City.",
-    "I'm currently studying Japanese using textbooks to cover the fundamentals and podcasts and radio stations for immersion.",
-    "I'm aiming to start taking the JLPT starting from N5 in July this year.",
+    "I'm currently building platforms for personal use including my own Fediverse instance",
+    "on Linode using Ansible and my own Forge platform for code hosting.",
     "I mainly keep up-to-date with tech news using news aggregation sites such as Reddit and Hacker News."
   ]
 }
