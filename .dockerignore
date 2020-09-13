@@ -1,1 +1,5 @@
 *
+!magefile.go
+!helpers/*
+!go.mod
+!go.sum

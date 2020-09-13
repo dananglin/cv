@@ -21,9 +21,9 @@
 
 .docker-test-rules:
   rules:
-  - if: '$CI_COMMIT_BRANCH'
-    changes:
+  - changes:
     - "docker/Dockerfile"
+    - "*.go"
     when: always
   - if: '$CI_COMMIT_REF_NAME =~ /^[0-9]{4}(.[0-9]{2}){2}$/'
     when: never
@@ -39,9 +39,7 @@
 
 .docker-publish-rules:
   rules:
-  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv"'
-    changes:
-    - "docker/Dockerfile"
+  - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PROJECT_PATH == "dananglin/cv" && $CI_PIPELINE_SOURCE == "web" && $BUILD_DOCKER_IMAGE == "true"'
     when: always
 
 #------------------------------------------------#
