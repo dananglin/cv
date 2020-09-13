@@ -3,7 +3,7 @@
 # Hidden job templates for CV build pipeline #
 #--------------------------------------------#
 .use-cv-builder:
-  image: ${IMAGE_NAME}:master-cb8a29c7
+  image: ${IMAGE_NAME}:master-84b29f04
 
 .cv-default-job-rules:
   rules:
@@ -26,15 +26,12 @@
 # Visible jobs for CV build pipeline #
 #------------------------------------#
 test:spellcheck:
-  before_script:
-  - apt-get update
-  - apt-get -y install aspell aspell-en
   extends:
   - .cv-default-job-rules
   - .default-tags
   - .use-cv-builder
   script:
-  - go run mage.go spellcheck
+  - cv-make spellcheck
   stage: test
 
 test:pdf:
@@ -43,7 +40,7 @@ test:pdf:
   - .default-tags
   - .use-cv-builder
   script:
-  - go run mage.go pdf
+  - cv-make pdf
   stage: test
 
 build:pdf:
@@ -63,7 +60,7 @@ build:pdf:
   - if: '$CI_MERGE_REQUEST_IID'
     when: always
   script:
-  - go run mage.go pdf
+  - cv-make pdf
   stage: build
 
 build:pdf-for-publish:
@@ -83,7 +80,7 @@ build:pdf-for-publish:
   - job: "test:pdf"
     artifacts: false
   script:
-  - go run mage.go pdf
+  - cv-make pdf
   - mv __output/cv.pdf ${RELEASE_CV_FILENAME}
   - echo "${CI_JOB_ID}" > build_job_id
   stage: build
@@ -123,7 +120,7 @@ publish:pdf:private:
   - job: "test:pdf"
     artifacts: false
   script:
-  - go run mage.go pdf
+  - cv-make pdf
   - mv __output/cv.pdf ${CV_DEPLOY_DIR}/${RELEASE_CV_FILENAME}
   stage: publish
   variables:
