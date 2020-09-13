@@ -4,10 +4,6 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"io/ioutil"
-	"os/exec"
-	"strings"
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
@@ -15,7 +11,6 @@ import (
 )
 
 const (
-	aspellLang             string = "en_GB"
 	aspellPersonalWordlist string = "./.aspell/.aspell.en.pws"
 	cvJsonDataFile         string = "./data/cv.json"
 	cvOutputDir            string = "./__output"
@@ -32,55 +27,7 @@ var Default = Pdf
 // Any error found while gathering the list is returned.
 // This function depends on the aspell program.
 func SpellCheck() error {
-	fmt.Printf("Reading data from %s...\n", cvJsonDataFile)
-
-	data, err := ioutil.ReadFile(cvJsonDataFile)
-	if err != nil {
-		return fmt.Errorf("unable to read data from %s, %s", cvJsonDataFile, err.Error())
-	}
-
-	// declare the aspell command and its standard input pipe.
-	cmd := exec.Command("aspell", "-d", aspellLang, "-p", aspellPersonalWordlist, "list")
-	stdin, err := cmd.StdinPipe()
-	if err != nil {
-		return err
-	}
-
-	// write the CV data to standard input for piping.
-	go func() {
-		defer stdin.Close()
-		io.WriteString(stdin, string(data))
-	}()
-
-	// run aspell and get the list of mispelt words (if any).
-	// (the output is a string.)
-	fmt.Println("Running aspell...")
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		return err
-	}
-
-	list := strings.Split(string(out), "\n")
-	if list[len(list)-1] == "" {
-		list = list[:len(list)-1]
-	}
-
-	if len(list) > 0 {
-		var b strings.Builder
-		errMsg := fmt.Sprintf("the following spelling errors were found in %s:", cvJsonDataFile)
-		b.WriteString(errMsg)
-
-		for _, v := range list {
-			s := "\n- " + v
-			b.WriteString(s)
-		}
-
-		return fmt.Errorf(b.String())
-	} else {
-		fmt.Println("No spelling errors were found.")
-	}
-
-	return nil
+	return helpers.SpellCheck(cvJsonDataFile, aspellPersonalWordlist)
 }
 
 // Tex takes the CV data file and generates the output tex file from
